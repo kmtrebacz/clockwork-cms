@@ -28,10 +28,6 @@ class ComposerStaticInit81a8c97a0e5abf0abb462913f4bef7b5
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
-        'P' => 
-        array (
-            'Pecee\\' => 6,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -50,10 +46,6 @@ class ComposerStaticInit81a8c97a0e5abf0abb462913f4bef7b5
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-        ),
-        'Pecee\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
         ),
     );
 
