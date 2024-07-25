@@ -9,7 +9,7 @@ require_once ROOT_DIR . 'vendor/autoload.php';
 $Database = new Database("127.0.0.1", "root", "root", "cw");
 $Database->connect();
 
-$loader = new \Twig\Loader\FilesystemLoader(ROOT_DIR . "templates/");
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_DIR . "clockwork-admin/templates/");
 $twig = new \Twig\Environment($loader, [
-     "cache" => ROOT_DIR . "cache/",
+     "cache" => ROOT_DIR . "clockwork-admin/cache/",
 ]);
