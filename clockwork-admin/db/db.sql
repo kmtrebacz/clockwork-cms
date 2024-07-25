@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 -- Database: `cw`
 --
 
-CREATE DATABASE cw;
+CREATE DATABASE IF NOT EXISTS cw;
 
 USE cw;
 
@@ -31,7 +31,7 @@ USE cw;
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL
