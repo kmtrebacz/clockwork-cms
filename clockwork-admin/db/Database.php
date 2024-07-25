@@ -16,23 +16,17 @@ class Database {
 
     public function connect(): void {
         try {
-            $this->db = new PDO("mysql:host={$this->servername};dbname={$this->database}", $this->username, $this->password);
+            $this->db = new PDO("mysql:host={$this->servername};", $this->username, $this->password);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $this->createDatabaseFromSqlFile();
+
+            $this->db = new PDO("mysql:host={$this->servername};dbname:$this->db", $this->username, $this->password);
         } catch (PDOException $err) {
             die("Connection failed: " . $err->getMessage());
         }
-
-        if (!$this->databaseExists()) {
-            $this->createDatabaseFromSqlFile();
-        }
     }
 
-    private function databaseExists(): bool {
-        $sql = "SHOW DATABASES LIKE '{$this->database}'";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt->rowCount() > 0;
-    }
 
     private function createDatabaseFromSqlFile(): void {
         $sqlFile = 'db.sql';
