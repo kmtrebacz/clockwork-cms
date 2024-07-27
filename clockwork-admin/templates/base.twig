@@ -76,7 +76,11 @@
                }
 
                main {
-                    width: calc(100% - 12em);
+                    {% if nav %}
+                         width: calc(100% - 12em);
+                    {% else %}
+                         width: 100%;
+                    {% endif %}
                     height: max-content;
                     margin-left: 12em;
                     padding: 1.2em;
@@ -172,6 +176,32 @@
           />
      </head>
      <body>
-          {% block body %}{% endblock %}
+          <div class="container">
+               {% if nav %}
+                    <nav>
+                         <ul>
+                              <li {% if activeNavItem == "Dashboard" %}class="active"{% endif %}>
+                                   <i class="fas fa-tachometer-alt"></i>
+                                   <span>Dashboard</span>
+                              </li>
+                              <li {% if activeNavItem == "Pages" %}class="active"{% endif %}>
+                                   <i class="fas fa-file-alt"></i>
+                                   <span>Pages</span>
+                              </li>
+                              <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
+                                   <i class="fas fa-cog"></i>
+                                   <span>Settings</span>
+                              </li>
+                              <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
+                                   <i class="fas fa-cog"></i>
+                                   <span>Settings</span>
+                              </li>
+                         </ul>
+                    </nav>
+               {% endif %}
+               <main>
+               {% block content %}{% endblock %}
+               </main>
+          </div>
      </body>
 </html>
