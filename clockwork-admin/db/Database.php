@@ -15,29 +15,13 @@ class Database {
     }
 
     public function connect(): void {
+        $this->dsn = "mysql:host={$this->servername};dbname={$this->database}";
+
         try {
-            $this->db = new PDO("mysql:host={$this->servername};", $this->username, $this->password);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $this->createDatabaseFromSqlFile();
-
-            $this->db = new PDO("mysql:host={$this->servername};dbname:$this->db", $this->username, $this->password);
-        } catch (PDOException $err) {
-            die("Connection failed: " . $err->getMessage());
-        }
-    }
-
-
-    private function createDatabaseFromSqlFile(): void {
-        $sqlFile = 'db.sql';
-        $sqlContent = file_get_contents($sqlFile);
-        $queries = explode(';', $sqlContent);
-        foreach ($queries as $query) {
-            $query = trim($query);
-            if (!empty($query)) {
-                $stmt = $this->db->prepare($query);
-                $stmt->execute();
-            }
+            $this->db = new PDO($this->dsn, $this->username, $this->password);
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+            die();
         }
     }
 

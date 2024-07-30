@@ -6,7 +6,7 @@ require_once ROOT_DIR . "clockwork-admin/db/Database.php";
 require_once ROOT_DIR . 'vendor/autoload.php';
 
 
-$Database = new Database("127.0.0.1", "root", "root", "cw");
+$Database = new Database("localhost", "root", "root", "cw");
 $Database->connect();
 
 $loader = new \Twig\Loader\FilesystemLoader(ROOT_DIR . "clockwork-admin/templates/");
