@@ -11,20 +11,30 @@
 {% endblock %}
 
 {% block content %}
-     <section>
+     <div class="card">
           {% if admin_exsists %}
-               <form action="#">
-                    <input type="text" name="name" placeholder="Username"><br>
-                    <input type="password" name="password" placeholder="Password"><br>
-                    <input type="submit" value="LOG IN">
-               </form>
+               <div class="card-header">
+                    <h3>LOG IN</h3>
+               </div>
+               <div class="card-body">
+                    <form action="#">
+                         <input type="text" name="name" placeholder="Username"><br>
+                         <input type="password" name="password" placeholder="Password"><br>
+                         <input type="submit" value="LOG IN">
+                    </form>
+               </div>
           {% else %}
-               <form action="#">
-                    <input type="text" name="name" placeholder="Username"><br>
-                    <input type="password" name="password" placeholder="Password"><br>
-                    <input type="password" name="password_repeat" placeholder="Repeat password"><br>
-                    <input type="submit" value="SIGN IN">
-               </form>
+               <div class="card-header">
+                    <h3>LOG IN</h3>
+               </div>
+               <div class="card-body">
+                    <form action="#">
+                         <input type="text" name="name" placeholder="Username"><br>
+                         <input type="password" name="password" placeholder="Password"><br>
+                         <input type="password" name="password_repeat" placeholder="Repeat password"><br>
+                         <input type="submit" value="SIGN IN">
+                    </form>
+               </div>
           {% endif %}
-     </section>
+     </div>
 {% endblock %}
