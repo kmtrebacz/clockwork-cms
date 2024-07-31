@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.twig" %}
 
 {% set nav = false %}
 
@@ -6,14 +6,8 @@
      {{ website_title }}
 {% endblock %}
 
-{% block style %}
-     main {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          padding: 1em;
-     }
+{% block head %}
+     <link rel="stylesheet" href="css/login-signin.css">
 {% endblock %}
 
 {% block content %}
@@ -28,7 +22,7 @@
                <form action="#">
                     <input type="text" name="name" placeholder="Username"><br>
                     <input type="password" name="password" placeholder="Password"><br>
-                    <input type="password_repeat" name="password_repeat" placeholder="Repeat password"><br>
+                    <input type="password" name="password_repeat" placeholder="Repeat password"><br>
                     <input type="submit" value="SIGN IN">
                </form>
           {% endif %}

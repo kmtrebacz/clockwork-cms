@@ -1,0 +1,11 @@
+main {
+    width: 100vh;
+    height: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main > .card {
+    margin-bottom: 0;
+}
