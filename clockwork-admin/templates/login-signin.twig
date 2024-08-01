@@ -3,7 +3,7 @@
 {% set nav = false %}
 
 {% block title %}
-     {{ website_title }}
+     {% if admin_exsists %}LOG IN{% else %}SIGN IN{% endif %}
 {% endblock %}
 
 {% block head %}
