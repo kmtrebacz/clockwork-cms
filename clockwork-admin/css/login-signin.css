@@ -8,3 +8,8 @@ main {
 main > .card {
     margin-bottom: 0;
 }
+
+input[type="text"], input[type="password"], input[type="number"] {
+    padding: 0.6em;
+    width: 20em;
+}
