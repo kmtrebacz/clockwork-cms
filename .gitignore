@@ -1,2 +1,2 @@
 .idea/
-clockwork-admin/cache/
+clockwork-admin/storage/cache/*

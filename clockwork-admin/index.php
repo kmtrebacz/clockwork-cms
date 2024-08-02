@@ -1,9 +1,6 @@
 <?php
 
-require_once "header.inc.php";
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-$template = $twig->load("base.twig");
-print($template->render([
-    "title" => "test",
-    "nav" => true,
-]));
+require_once './config/routes.php';

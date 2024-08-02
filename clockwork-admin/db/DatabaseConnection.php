@@ -1,17 +1,18 @@
 <?php
 
-class Database {
+class DatabaseConnection {
     private string $servername;
     private string $username;
     private string $password;
     private string $database;
     private ?PDO $db;
+    private string $dsn;
 
-    public function __construct(string $servername, string $username, string $password, string $database) {
-        $this->servername = $servername;
-        $this->username = $username;
-        $this->password = $password;
-        $this->database = $database;
+    public function __construct(array $config) {
+        $this->servername = $config['servername'];
+        $this->username = $config['username'];
+        $this->password = $config['password'];
+        $this->database = $config['database'];
     }
 
     public function connect(): void {
