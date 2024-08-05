@@ -8,15 +8,25 @@ use Twig\Error\SyntaxError;
 class BaseController
 {
     protected $twig;
+    protected $db;
 
     public function __construct()
     {
         $this->twig = $this->initializeTwig();
+        $this->db = $this->connectDatabase();
     }
 
     private function initializeTwig(): Environment
     {
         return require __DIR__ . '/../config/twig.php';
+    }
+
+    private function connectDatabase(): DatabaseConnection
+    {
+        $config = require ROOT_DIR . 'config/config.php';
+        $db = new DatabaseConnection($config['db']);
+        $db->connect();
+        return $db;
     }
 
     protected function renderTemplate(string $templatePath, array $data): void
