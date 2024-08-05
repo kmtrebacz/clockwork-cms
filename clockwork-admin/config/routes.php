@@ -7,7 +7,7 @@ require_once __DIR__ . '/../router/Router.php';
 $router = new Router();
 
 $router->get('/clockwork-admin/', function() {
-    echo "Welcome to Clockwork CMS!";
+    header('Location: /clockwork-admin/dashboard');
 });
 
 $router->get('/clockwork-admin/dashboard', function() {
