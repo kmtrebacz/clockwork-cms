@@ -21,9 +21,19 @@ $router->get('/clockwork-admin/log-in', function() {
     $authController->login();
 });
 
+$router->post('/clockwork-admin/log-in', function() {
+    $authController = new AuthController();
+    $authController->handleLogin();
+});
+
 $router->get('/clockwork-admin/sign-up', function() {
     $authController = new AuthController();
     $authController->signup();
+});
+
+$router->post('/clockwork-admin/sign-up', function() {
+    $authController = new AuthController();
+    $authController->handleSignup();
 });
 
 $router->dispatch();

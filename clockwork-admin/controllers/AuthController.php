@@ -20,22 +20,18 @@ class AuthController extends BaseController {
     }
 
     public function handleLogin(): void {
-        $username = $_POST['name'] ?? '';
+        $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        if ($this->validateLogin($username, $password)) {
-            session_start();
-            $_SESSION['user_id'] = $this->getUserId($username); // Store user ID in session
-            header('Location: /dashboard');
-            exit();
-        } else {
-            header('Location: /login');
-            exit();
-        }
+        $this->validateLogin($username, $password);
+        session_start();
+        $_SESSION['user_id'] = $this->getUserId($username); // Store user ID in session
+        header('Location: clockwork-admin/dashboard');
+        exit();
     }
 
     public function handleSignup(): void {
-        $username = $_POST['name'] ?? '';
+        $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
         $passwordRepeat = $_POST['password_repeat'] ?? '';
 
@@ -46,14 +42,12 @@ class AuthController extends BaseController {
 
         if ($password !== $passwordRepeat) {
             echo "Passwords do not match.";
+            return;
         }
 
-        if ($this->addUserToDB($username, $password)) {
-            header('Location: /log-in');
-            exit();
-        } else {
-            echo "Error: User registration failed.";
-        }
+        $this->addUserToDB($username, $password);
+        header('Location: clockwork-admin/log-in');
+        exit();
     }
 
     private function anyUsersExist(): bool {
