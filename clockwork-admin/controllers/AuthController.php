@@ -8,14 +8,15 @@ class AuthController extends BaseController {
     }
 
     public function login(): void {
-        if ($this->anyUsersExist())
-            header('Location: /clockwork-admin/log-in');
+        if ($this->anyUsersExist()) {
+            $this->renderTemplate('/pages/log-in.twig', []);
+        }
         else
             header('Location: /clockwork-admin/sign-up');
     }
 
     public function signup(): void {
-        header('Location: /clockwork-admin/sign-up');
+        $this->renderTemplate('/pages/sign-up.twig', []);
     }
 
     public function handleLogin(): void {
@@ -48,7 +49,7 @@ class AuthController extends BaseController {
         }
 
         if ($this->addUserToDB($username, $password)) {
-            header('Location: /login');
+            header('Location: /log-in');
             exit();
         } else {
             echo "Error: User registration failed.";
