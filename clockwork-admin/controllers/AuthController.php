@@ -50,6 +50,14 @@ class AuthController extends BaseController {
         exit();
     }
 
+    public function logout(): void {
+        session_start();
+        session_unset();
+        session_destroy();
+        header('Location: /login');
+        exit();
+    }
+
     private function anyUsersExist(): bool {
         $result = $this->db->query('SELECT COUNT(*) as count FROM users');
         return $result[0]['count'] > 0;
