@@ -26,7 +26,7 @@ class AuthController extends BaseController {
         $this->validateLogin($username, $password);
         session_start();
         $_SESSION['user_id'] = $this->getUserId($username); // Store user ID in session
-        header('Location: clockwork-admin/dashboard');
+        header('Location: /clockwork-admin/dashboard');
         exit();
     }
 
@@ -46,7 +46,7 @@ class AuthController extends BaseController {
         }
 
         $this->addUserToDB($username, $password);
-        header('Location: clockwork-admin/log-in');
+        header('Location: /clockwork-admin/log-in');
         exit();
     }
 
@@ -54,7 +54,7 @@ class AuthController extends BaseController {
         session_start();
         session_unset();
         session_destroy();
-        header('Location: /login');
+        header('Location: /clockwork-admin/log-in');
         exit();
     }
 
