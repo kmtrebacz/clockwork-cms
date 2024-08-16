@@ -82,7 +82,7 @@ nav > ul > a > li > i {
     margin-right: 0.7em;
 }
 
-main > .card {
+main > .card, main > section {
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
     margin-bottom: 1.2em;
@@ -96,12 +96,24 @@ main > .card > .card-header {
     border-bottom: 1px solid var(--border-color);
 }
 
-main > .card > .card-body {
+main > .card > .card-body, main > section {
     padding: 0 1em;
 }
 
-main > .card > .card-body > *:not(br) {
+main > .card > .card-body > *:not(br), main > section > *:not(br){
     margin: 1em 0;
+}
+
+main > section > table {
+     width: 100%;
+     border-collapse: collapse;
+     border: 1px solid var(--muted-color);
+}
+
+main > section > table th, main > section > table td {
+    border: 1px solid var(--muted-color);
+    padding: 0.5em;
+    text-align: left;
 }
 
 
