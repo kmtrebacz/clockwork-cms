@@ -36,6 +36,9 @@ nav {
     width: 12em;
     height: 100vh;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     top: 0;
     left: 0;
 }
