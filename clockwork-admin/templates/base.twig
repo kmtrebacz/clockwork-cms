@@ -19,28 +19,32 @@
                {% if nav %}
                     <nav>
                          <ul>
-                              <li {% if activeNavItem == "Dashboard" %}class="active"{% endif %}>
-                                   <i class="fas fa-tachometer-alt"></i>
-                                   <span>Dashboard</span>
-                              </li>
-                              <li {% if activeNavItem == "Pages" %}class="active"{% endif %}>
-                                   <i class="fas fa-file-alt"></i>
-                                   <span>Pages</span>
-                              </li>
-                              <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
-                                   <i class="fas fa-cog"></i>
-                                   <span>Settings</span>
-                              </li>
-                              <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
-                                   <i class="fas fa-cog"></i>
-                                   <span>Settings</span>
-                              </li>
+                              <a href="/clockwork-admin/dashboard">
+                                   <li {% if activeNavItem == "Dashboard" %}class="active"{% endif %}>
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                   </li>
+                              </a>
+                              <a href="/clockwork-admin/pages">
+                                   <li {% if activeNavItem == "Pages" %}class="active"{% endif %}>
+                                        <i class="fas fa-file-alt"></i>
+                                        <span>Pages</span>
+                                   </li>
+                              </a>
+                              <a href="/clockwork-admin/settings">
+                                   <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
+                                        <i class="fas fa-cog"></i>
+                                        <span>Settings</span>
+                                   </li>
+                              </a>
                          </ul>
                          <ul>
-                              <li>
-                                   <i class="fas fa-sign-out-alt"></i>
-                                   <span>Log out</span>
-                              </li>
+                              <a href="/clockwork-admin/log-out">
+                                   <li>
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Log out</span>
+                                   </li>
+                              </a>
                          </ul>
                     </nav>
                {% endif %}

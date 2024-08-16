@@ -47,24 +47,38 @@ nav > ul {
     list-style: none;
 }
 
-nav > ul > li {
+nav > ul > a {
+    text-decoration: none;
+    color: var(--background-color);
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > a:hover, nav > ul > a:focus {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav > ul > a > li {
     padding: 0.7em;
     cursor: pointer;
 }
 
-nav > ul > li:hover {
+nav > ul > a > li:hover {
     background-color: var(--primary-light);
 }
 
-nav > ul > li.active {
+nav > ul > a > li.active {
     background-color: var(--primary-color);
 }
 
-nav > ul > li.active:hover {
+nav > ul > a > li.active:hover {
     background-color: var(--primary-dark);
 }
 
-nav > ul > li > i {
+nav > ul > a > li > i {
     margin-right: 0.7em;
 }
 
@@ -91,12 +105,12 @@ main > .card > .card-body > *:not(br) {
 }
 
 
-a:not(li > a) {
+a:not(ul > a) {
     text-decoration: underline;
     color: var(--primary-color);
 }
 
-a:not(li > a):hover {
+a:not(ul > a):hover {
     color: var(--primary-dark);
 }
 
