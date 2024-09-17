@@ -35,6 +35,10 @@ class AuthController extends BaseController {
         $password = $_POST['password'] ?? '';
         $passwordRepeat = $_POST['password_repeat'] ?? '';
 
+        print($username);
+        print($password);
+        print($passwordRepeat);
+
         if ($this->isUsernameTaken($username)) {
             echo "Error: User already exists.";
             return;
@@ -59,8 +63,8 @@ class AuthController extends BaseController {
     }
 
     private function anyUsersExist(): bool {
-        $result = $this->db->query('SELECT COUNT(*) as count FROM users');
-        return $result[0]['count'] > 0;
+         $result = $this->db->query('SELECT COUNT(*) as count FROM users',returningArray: True);
+         return $result["count"] > 0;
     }
 
     private function validateLogin($username, $password): bool {
@@ -77,12 +81,12 @@ class AuthController extends BaseController {
     }
 
     private function getUserId($username) {
-        $result = $this->db->query('SELECT id FROM users WHERE username = ?', [$username]);
-        return $result ? $result[0]['id'] : null;
+        $result = $this->db->query('SELECT rowid FROM users WHERE username = ?', [$username]);
+        return $result ? $result[0]['rowid'] : null;
     }
 
     private function isUsernameTaken($username): bool {
-        $result = $this->db->query('SELECT COUNT(*) as count FROM users WHERE username = ?', [$username]);
-        return $result[0]['count'] > 0;
+         $result = $this->db->query("SELECT COUNT(*) as count FROM users WHERE username = ?", [$username]);
+         return $result[0]["count"] > 0;
     }
 }

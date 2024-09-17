@@ -1,25 +1,16 @@
 <?php
 
 class DatabaseConnection {
-    private string $servername;
-    private string $username;
-    private string $password;
-    private string $database;
-    private ?PDO $db;
-    private string $dsn;
+     private string $path;
+     private ?PDO $db;
 
     public function __construct(array $config) {
-        $this->servername = $config['servername'];
-        $this->username = $config['username'];
-        $this->password = $config['password'];
-        $this->database = $config['database'];
+        $this->path = $config['path'];
     }
 
     public function connect(): void {
-        $this->dsn = "mysql:host={$this->servername};dbname={$this->database}";
-
         try {
-            $this->db = new PDO($this->dsn, $this->username, $this->password);
+            $this->db = new PDO("sqlite:$this->path");
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
             die();
@@ -28,17 +19,14 @@ class DatabaseConnection {
 
     public function query(string $sql, array $params = [], bool $returningArray = false): ?array {
         try {
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute($params);
+             $stmt = $this->db->prepare($sql);
+             if ($params == []) $stmt->execute();
+             else $stmt->execute($params);
         } catch (PDOException $e) {
             die("Preparing the query failed: " . $e->getMessage());
         }
 
-        if ($stmt->rowCount() > 0) {
-            if ($returningArray) return $stmt->fetch(PDO::FETCH_ASSOC);
-            else return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            return null;
-        }
+          if ($returningArray) return $stmt->fetch(PDO::FETCH_ASSOC);
+          else return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

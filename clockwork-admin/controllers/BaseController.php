@@ -23,8 +23,8 @@ class BaseController
 
     private function connectDatabase(): DatabaseConnection
     {
-        $config = require ROOT_DIR . 'config/config.php';
-        $db = new DatabaseConnection($config['db']);
+        $config = require __DIR__ . '/../config/config.php';
+        $db = new DatabaseConnection($config);
         $db->connect();
         return $db;
     }
