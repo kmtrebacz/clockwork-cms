@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../controllers/DashboardController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
+require_once __DIR__ . '/../controllers/PageController.php';
 require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 require_once __DIR__ . '/../db/DatabaseConnection.php';
 require_once __DIR__ . '/../router/Router.php';
@@ -18,6 +19,15 @@ $router->get('/clockwork-admin/dashboard', function() {
 
     $dashboardController = new DashboardController();
     $dashboardController->render();
+});
+
+
+$router->get('/clockwork-admin/pages', function() {
+    $authMiddleware = new AuthMiddleware();
+    $authMiddleware->handle();
+
+    $pagesController = new PagesController();
+    $pagesController->render();
 });
 
 $router->get('/clockwork-admin/log-in', function() {

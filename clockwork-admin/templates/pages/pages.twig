@@ -4,22 +4,26 @@
 
 {% block title %}Pages{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="assets/css/pages.css">
+{% endblock %}
+
 {% block content %}
      <h2>Pages</h2>
      <section>
           {% if pages is defined %}
-               <thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th></thead>
+               <table><thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th></thead>
                <tbody>
                     {% for page in pages %}
                     <tr>
-                         <td>{{ page.title }}</td>
+                         <td>{{ page.name }}</td>
                          <td>{{ page.path }}</td>
                          <td>{{ page.url }}</td>
                          <td>{{ page.author }}</td>
                          <td>{{ page.last_changes }}</td>
                     </tr>
                     {% endfor %}
-               </tbody>
+               </tbody></table>
           {% else %}
                <em>NO PAGES FOUND</em>
           {% endif %}
