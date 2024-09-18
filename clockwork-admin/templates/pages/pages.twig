@@ -26,10 +26,16 @@
                               <td>{{ page.last_changes }}</td>
                               <td>
                                    <a href="#">Edit</a>
-                                   <a href="#">Quick edit</a>
+                                   <a href="#" class="popup-link" data-popup="popup-{{ page.name }}">Quick edit</a>
                                    <a href="#">Delete</a>
                               </td>
                          </tr>
+                         <div class="popup" id="popup-{{ page.name }}">
+                              <div class="popup-content">
+                                   <p>{{ page.name }}</p>
+                                   <button class="close-popup">Close</button>
+                              </div>
+                         </div>
                          {% endfor %}
                     </tbody></table>
                {% else %}
@@ -37,4 +43,8 @@
                {% endif %}
           </div>
      </div>
+{% endblock %}
+
+{% block js %}
+<script src="assets/js/popup.js"></script>
 {% endblock %}
