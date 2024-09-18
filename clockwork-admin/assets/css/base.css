@@ -104,13 +104,13 @@ main > .card > .card-body > *:not(br), main > section > *:not(br){
     margin: 1em 0;
 }
 
-main > section > table {
+main table {
      width: 100%;
      border-collapse: collapse;
      border: 1px solid var(--muted-color);
 }
 
-main > section > table th, main > section > table td {
+main table th, main table td {
     border: 1px solid var(--muted-color);
     padding: 0.5em;
     text-align: left;

@@ -9,23 +9,27 @@
 {% endblock %}
 
 {% block content %}
-     <h2>Pages</h2>
-     <section>
-          {% if pages is defined %}
-               <table><thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th></thead>
-               <tbody>
-                    {% for page in pages %}
-                    <tr>
-                         <td>{{ page.name }}</td>
-                         <td>{{ page.path }}</td>
-                         <td>{{ page.url }}</td>
-                         <td>{{ page.author }}</td>
-                         <td>{{ page.last_changes }}</td>
-                    </tr>
-                    {% endfor %}
-               </tbody></table>
-          {% else %}
-               <em>NO PAGES FOUND</em>
-          {% endif %}
-     </section>
+     <div class="card">
+          <div class="card-header">
+               <h3>Pages</h3>
+          </div>
+          <div class="card-body">
+               {% if pages is defined %}
+                    <table><thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th></thead>
+                    <tbody>
+                         {% for page in pages %}
+                         <tr>
+                              <td>{{ page.name }}</td>
+                              <td>{{ page.path }}</td>
+                              <td>{{ page.url }}</td>
+                              <td>{{ page.author }}</td>
+                              <td>{{ page.last_changes }}</td>
+                         </tr>
+                         {% endfor %}
+                    </tbody></table>
+               {% else %}
+                    <em>NO PAGES FOUND</em>
+               {% endif %}
+          </div>
+     </div>
 {% endblock %}
