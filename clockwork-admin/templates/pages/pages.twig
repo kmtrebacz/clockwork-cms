@@ -15,7 +15,7 @@
           </div>
           <div class="card-body">
                {% if pages is defined %}
-                    <table><thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th></thead>
+                    <table><thead><tr><th>Title</th><th>Path</th><th>URL</th><th>Author</th><th>Last changes</th><th>Actions</th></thead>
                     <tbody>
                          {% for page in pages %}
                          <tr>
@@ -24,6 +24,11 @@
                               <td>{{ page.url }}</td>
                               <td>{{ page.author }}</td>
                               <td>{{ page.last_changes }}</td>
+                              <td>
+                                   <a href="#">Edit</a>
+                                   <a href="#">Quick edit</a>
+                                   <a href="#">Delete</a>
+                              </td>
                          </tr>
                          {% endfor %}
                     </tbody></table>
