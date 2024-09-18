@@ -20,15 +20,15 @@ class PagesController extends BaseController {
                     $resultFileExsist = $this->db->query("SELECT COUNT(*) as count FROM pages WHERE name = ?;", [$fileName]);
                     
                     if ($resultFileExsist[0]['count'] == 0) {
-                         $this->db->query("INSERT INTO pages VALUES (?, ?, ?, ?, datetime())", [$fileName, $filePath, null, $_SESSION["user_id"]]);
+                         $this->db->query("INSERT INTO pages VALUES (?, ?, ?, ?, datetime())", [$fileName, realpath($filePath), null, $_SESSION["user_id"]]);
                     }
 
                     $resultPageInfo = $this->db->query("SELECT pages.path, pages.url, pages.last_changes, users.username FROM pages JOIN users ON users.rowid = pages.author WHERE pages.name = ?", [$fileName], True);
 
                     array_push($files, [
-                         "name" => $fileName,
-                         "path" => $filePath,
-                         "url" => $resultPageInfo["path"],
+                         "name" => pathinfo($fileName, PATHINFO_FILENAME),
+                         "path" => $resultPageInfo["path"],
+                         "url" => $resultPageInfo["url"],
                          "author" => $resultPageInfo["username"],
                          "last_changes" => $resultPageInfo["last_changes"],
                     ]);
