@@ -4,6 +4,7 @@ require_once __DIR__ . '/../controllers/DashboardController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/PageController.php';
 require_once __DIR__ . '/../middleware/AuthMiddleware.php';
+require_once __DIR__ . '/../services/PagesServices.php';
 require_once __DIR__ . '/../db/DatabaseConnection.php';
 require_once __DIR__ . '/../router/Router.php';
 
@@ -53,6 +54,11 @@ $router->post('/clockwork-admin/sign-up', function() {
 $router->get('/clockwork-admin/log-out', function() {
     $authController = new AuthController();
     $authController->logout();
+});
+
+$router->post('/clockwork-admin/rename-file', function() {
+     $PagesServices = new PagesServices();
+     $PagesServices->renameFile();
 });
 
 $router->dispatch();

@@ -1,7 +1,12 @@
 <?php
 
 class PagesServices {
-     public function renameFile($post): void {
-          rename($post["fileName"], $post["newFileName"]);
+     private function trimAfterLastSlash($input) {
+          return substr($input, 0, strrpos($input, '/'));
+     }
+     public function renameFile(): void {
+          $newFilePath = $this->trimAfterLastSlash($_POST["filePath"]) . "/" . $_POST["newFileName"];
+          rename($_POST["filePath"], $newFilePath);
+          header("Location: /clockwork-admin/pages");
      }
 }
