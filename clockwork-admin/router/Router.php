@@ -18,8 +18,7 @@ class Router {
         if (isset($this->routes[$method][$uri])) {
             call_user_func($this->routes[$method][$uri]);
         } else {
-            // Handle 404 Not Found
-            header("HTTP/1.0 404 Not Found");
+            http_response_code(404);
             echo "404 Not Found";
         }
     }
