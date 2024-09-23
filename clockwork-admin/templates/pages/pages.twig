@@ -32,7 +32,11 @@
                          </tr>
                          <div class="popup" id="popup-{{ page.name }}">
                               <div class="popup-content">
-                                   <p>{{ page.name }}</p>
+                                   <form action="#" method="post">
+                                        <input type="text" name="new_name" placeholder="New name">
+                                        <input type="submit" value="Rename">
+                                   </form>
+                                   <br><br>
                                    <button class="close-popup">Close</button>
                               </div>
                          </div>
