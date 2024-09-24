@@ -33,5 +33,6 @@ Now you have to start the web server. Now admin page will be available at `websi
      - [ ] Set URLs
      - [ ] Delete files
      - [ ] Display pages on defined URLs
+- [ ] Error handling
 - [ ] clockwork-admin/settings
-- [ ] Page Editor
+- [ ] Page editor
