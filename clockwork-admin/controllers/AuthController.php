@@ -8,51 +8,69 @@ class AuthController extends BaseController {
     }
 
     public function login(): void {
-        if ($this->anyUsersExist()) {
-            $this->renderTemplate('/pages/log-in.twig', []);
+        if ($this->anyUsersExist() || defined($_SESSION["user_id"])) {
+             $this->renderTemplate('/pages/log-in.twig', [
+                  "error" => $this->getError(),
+             ]);
         }
         else
             header('Location: /clockwork-admin/sign-up');
     }
 
+     public function handleLogin(): void {
+          $username = $_POST['username'];
+          $password = $_POST['password'];
+
+          if ($username == '' or $username == null)
+               $this->redirectWithError("/log-in", "Username input is empty!");
+
+          if ($password == '' or $password == null)
+               $this->redirectWithError("/log-in", "Password input is empty!");
+
+
+          if ($this->validateLogin($username, $password)) {
+               session_start();
+               $_SESSION['user_id'] = $this->getUserId($username);
+               header('Location: dashboard');
+               exit();
+          } else {
+               $this->redirectWithError("log-in", "Wrong password or username");
+          }
+     }
+
+
     public function signup(): void {
-        $this->renderTemplate('/pages/sign-up.twig', []);
-    }
-
-    public function handleLogin(): void {
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
-
-        $this->validateLogin($username, $password);
-        session_start();
-        $_SESSION['user_id'] = $this->getUserId($username); // Store user ID in session
-        header('Location: /clockwork-admin/dashboard');
-        exit();
+         $this->renderTemplate('/pages/sign-up.twig', [
+              "error" => $this->getError(),
+         ]);
     }
 
     public function handleSignup(): void {
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
-        $passwordRepeat = $_POST['password_repeat'] ?? '';
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $passwordRepeat = $_POST['password_repeat'];
 
-        print($username);
-        print($password);
-        print($passwordRepeat);
+        if ($username == '' or $username == null)
+             $this->redirectWithError("/sign-up", "Username input is empty!");
 
-        if ($this->isUsernameTaken($username)) {
-            echo "Error: User already exists.";
-            return;
-        }
+        if ($password == '' or $password == null)
+             $this->redirectWithError("/sign-up", "Password input is empty!");
 
-        if ($password !== $passwordRepeat) {
-            echo "Passwords do not match.";
-            return;
-        }
+        if ($passwordRepeat == '' or $passwordRepeat == null)
+             $this->redirectWithError("/sign-up", "Repeated password input is empty!");
+
+
+        if ($this->isUsernameTaken($username))
+             $this->redirectWithError("/sign-up", "User already exists.");
+
+        if ($password !== $passwordRepeat)
+             $this->redirectWithError("/sign-up", "Passwords do not match.");
 
         $this->addUserToDB($username, $password);
-        header('Location: /clockwork-admin/log-in');
+        header('Location: /log-in');
         exit();
     }
+
 
     public function logout(): void {
         session_start();
@@ -61,6 +79,7 @@ class AuthController extends BaseController {
         header('Location: /clockwork-admin/log-in');
         exit();
     }
+
 
     private function anyUsersExist(): bool {
          $result = $this->db->query('SELECT COUNT(*) as count FROM users',returningArray: True);

@@ -15,6 +15,14 @@
           {% block head %}{% endblock %}
      </head>
      <body>
+          {% if error is not null %}
+          <div class="popup" id="popup-error">
+               <div class="popup-content">
+                    <h3>ERROR!</h3>
+                    <p>{{ error|replace({'-': " "}) }}</p>
+               </div>
+          </div>
+          {% endif %}
           <div class="container">
                {% if nav %}
                     <nav>
@@ -52,6 +60,12 @@
                {% block content %}{% endblock %}
                </main>
           </div>
+          <script src="assets/js/popup.js"></script>
+          {% if error is not null %}
+          <script>
+               document.addEventListener('DOMContentLoaded', openPopup("popup-error"));
+          </script>
+          {% endif %}
           {% block js %}{% endblock %}
      </body>
 </html>
