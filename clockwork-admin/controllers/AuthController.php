@@ -10,7 +10,7 @@ class AuthController extends BaseController {
     public function login(): void {
         if ($this->anyUsersExist() || defined($_SESSION["user_id"])) {
              $this->renderTemplate('/pages/log-in.twig', [
-                  "error" => $this->getError(),
+                  "error" => $this->errorController->getError(),
              ]);
         }
         else
@@ -22,10 +22,10 @@ class AuthController extends BaseController {
           $password = $_POST['password'];
 
           if ($username == '' or $username == null)
-               $this->redirectWithError("/log-in", "Username input is empty!");
+               $this->errorController->getError()("/log-in", "Username input is empty!");
 
           if ($password == '' or $password == null)
-               $this->redirectWithError("/log-in", "Password input is empty!");
+               $this->errorController->redirectWithError("/log-in", "Password input is empty!");
 
 
           if ($this->validateLogin($username, $password)) {
@@ -34,14 +34,14 @@ class AuthController extends BaseController {
                header('Location: dashboard');
                exit();
           } else {
-               $this->redirectWithError("log-in", "Wrong password or username");
+               $this->errorController->redirectWithError("log-in", "Wrong password or username");
           }
      }
 
 
     public function signup(): void {
          $this->renderTemplate('/pages/sign-up.twig', [
-              "error" => $this->getError(),
+              "error" => $this->errorController->getError(),
          ]);
     }
 
@@ -51,20 +51,20 @@ class AuthController extends BaseController {
         $passwordRepeat = $_POST['password_repeat'];
 
         if ($username == '' or $username == null)
-             $this->redirectWithError("/sign-up", "Username input is empty!");
+             $this->errorController->redirectWithError("/sign-up", "Username input is empty!");
 
         if ($password == '' or $password == null)
-             $this->redirectWithError("/sign-up", "Password input is empty!");
+             $this->errorController->redirectWithError("/sign-up", "Password input is empty!");
 
         if ($passwordRepeat == '' or $passwordRepeat == null)
-             $this->redirectWithError("/sign-up", "Repeated password input is empty!");
+             $this->errorController->redirectWithError("/sign-up", "Repeated password input is empty!");
 
 
         if ($this->isUsernameTaken($username))
-             $this->redirectWithError("/sign-up", "User already exists.");
+             $this->errorController->redirectWithError("/sign-up", "User already exists.");
 
         if ($password !== $passwordRepeat)
-             $this->redirectWithError("/sign-up", "Passwords do not match.");
+             $this->errorController->redirectWithError("/sign-up", "Passwords do not match.");
 
         $this->addUserToDB($username, $password);
         header('Location: /log-in');

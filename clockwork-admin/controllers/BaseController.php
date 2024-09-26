@@ -5,15 +5,19 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+require_once __DIR__ . "/ErrorController.php";
+
 class BaseController
 {
     protected $twig;
     protected $db;
+    protected $errorController;
 
     public function __construct()
     {
         $this->twig = $this->initializeTwig();
         $this->db = $this->connectDatabase();
+        $this->errorController = new ErrorController();
     }
 
     private function initializeTwig(): Environment
@@ -38,19 +42,4 @@ class BaseController
             echo 'An error occurred while loading the template: ' . $e->getMessage();
         }
     }
-
-     public function redirectWithError(string $url, string $message): void 
-     {
-          $slug = str_replace(' ', '-', strtolower($message));
-          header("Location: $url?error=$slug");
-          exit();
-     }
-
-     public function getError(): string|null
-     {
-          if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["error"]) && $_GET["error"] != '')
-               return $_GET["error"];
-          return null;
-     }
 }
-
