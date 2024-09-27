@@ -7,8 +7,7 @@ use Twig\Error\SyntaxError;
 
 require_once __DIR__ . "/ErrorController.php";
 
-class BaseController
-{
+class BaseController {
     protected $twig;
     protected $db;
     protected $errorController;

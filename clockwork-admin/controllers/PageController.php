@@ -41,6 +41,7 @@ class PagesController extends BaseController {
 
      public function render(): void {
           $this->renderTemplate('/pages/pages.twig', [
+               "error" => $this->errorController->getError(),
                'activeNavItem' => 'Pages',
                'pages' => $this->getFiles(),
           ]);
