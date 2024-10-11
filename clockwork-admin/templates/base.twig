@@ -17,9 +17,13 @@
      <body>
           {% if error is not null %}
           <div class="popup" id="popup-error">
-               <div class="popup-content">
-                    <h3>ERROR!</h3>
-                    <p>{{ error|replace({'-': " "}) }}</p>
+               <div class="popup-card">
+                    <div class="popup-header">
+                         <h3>ERROR!</h3>
+                    </div>
+                    <div class="popup-content">
+                         <p>{{ error|replace({'-': " "}) }}</p>
+                    </div>
                </div>
           </div>
           {% endif %}

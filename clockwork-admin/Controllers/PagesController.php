@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__ . '/BaseController.php';
+namespace Admin\Controllers;
+
+require_once __DIR__ . '/../Controllers/BaseController.php';
 
 class PagesController extends BaseController {
      private $dir_path = __DIR__ . "/../../clockwork-website/";
@@ -41,7 +43,6 @@ class PagesController extends BaseController {
 
      public function render(): void {
           $this->renderTemplate('/pages/pages.twig', [
-               "error" => $this->errorController->getError(),
                'activeNavItem' => 'Pages',
                'pages' => $this->getFiles(),
           ]);

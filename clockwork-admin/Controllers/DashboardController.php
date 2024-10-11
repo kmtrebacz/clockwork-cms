@@ -1,6 +1,10 @@
 <?php
 
-require_once __DIR__ . '/BaseController.php';
+namespace Admin\Controllers;
+
+require_once __DIR__ . '/../Controllers/BaseController.php';
+
+use Admin\Controllers\BaseController;
 
 class DashboardController extends BaseController {
 
@@ -10,6 +14,7 @@ class DashboardController extends BaseController {
 
     public function render(): void {
         $this->renderTemplate('/pages/dashboard.twig', [
+            'error' => $_GET['error'] ?? null,
             'activeNavItem' => 'Dashboard',
             'nav' => true,
             'cards' => [

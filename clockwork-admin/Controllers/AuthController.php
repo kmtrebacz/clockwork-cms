@@ -1,10 +1,17 @@
 <?php
 
-require_once __DIR__ . '/BaseController.php';
+namespace Admin\Controllers;
+
+require_once __DIR__ . '/../Controllers/BaseController.php';
+require_once __DIR__ . '/../Handlers/AuthErrorHandler.php';
+
+use Admin\Controllers\BaseController;
+use Admin\Handlers\AuthErrorHandler;
 
 class AuthController extends BaseController {
     public function __construct() {
         parent::__construct();
+        $this->errorController = new AuthErrorHandler();
     }
 
     public function login(): void {

@@ -1,11 +1,18 @@
 <?php
 
+namespace Admin\Controllers;
+
+require_once __DIR__ . "/../Handlers/ErrorHandler.php";
+require_once __DIR__ . "/../Database/DatabaseConnection.php";
+
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-
-require_once __DIR__ . "/ErrorController.php";
+use Admin\Database\DatabaseConnection;
+use Admin\Handlers\ErrorHandler;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class BaseController {
     protected $twig;
@@ -16,17 +23,27 @@ class BaseController {
     {
         $this->twig = $this->initializeTwig();
         $this->db = $this->connectDatabase();
-        $this->errorController = new ErrorController();
+        $this->errorController = new ErrorHandler();
     }
 
     private function initializeTwig(): Environment
     {
-        return require __DIR__ . '/../config/twig.php';
+        $loader = new FilesystemLoader(__DIR__ . '/../templates');
+        $twig = new Environment($loader, [
+            'cache' => __DIR__ . '/../storage/cache/twig',
+            'debug' => true,
+        ]);
+
+        $twig->addFunction(new TwigFunction("csrf_token", function () {
+            return csrf_token();
+        }));
+
+        return $twig;
     }
 
     private function connectDatabase(): DatabaseConnection
     {
-        $config = require __DIR__ . '/../config/config.php';
+        $config = require __DIR__ . '/../config.php';
         $db = new DatabaseConnection($config);
         $db->connect();
         return $db;

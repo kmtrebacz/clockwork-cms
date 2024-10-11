@@ -1,5 +1,11 @@
 {
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "pecee/simple-router": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Admin\\": "clockwork-admin/"
+        }
     }
 }

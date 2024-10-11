@@ -1,5 +1,9 @@
 <?php
 
+namespace Admin\Database;
+
+use PDO;
+
 class DatabaseConnection {
      private string $path;
      private ?PDO $db;
