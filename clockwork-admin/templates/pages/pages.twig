@@ -32,7 +32,7 @@
                          </tr>
                          <div class="popup" id="popup-{{ page.name }}">
                               <div class="popup-content">
-                                   <form action="/clockwork-admin/rename-file" method="post">
+                                   <form action="/clockwork-admin/pages/rename" method="post">
                                         <input type="hidden" name="filePath" value="{{ page.path }}">
                                         <input type="text" name="newFileName" placeholder="New name">
                                         <input type="submit" value="Rename">
