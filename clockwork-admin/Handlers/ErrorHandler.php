@@ -14,7 +14,7 @@ class ErrorHandler implements IExceptionHandler
         if ($request->getUrl()->contains('/api')) {
             response()->json([
                 'error' => $error->getMessage(),
-                'code'  => $error->getCode(),
+                'code' => $error->getCode(),
             ]);
             return;
         }

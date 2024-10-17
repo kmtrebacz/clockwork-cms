@@ -17,8 +17,9 @@ class PagesServices extends BaseService
     }
 
     public function renameFile(): void {
-        if ($_POST["newFileName"] == "")
-            $this->errorController->redirectWithError("pages", "New file name is empty!");
+        if ($_POST["newFileName"] == "") {
+            throw new \Exception("New file name is empty!");
+        }
         $newFilePath = $this->trimAfterLastSlash($_POST["filePath"]) . "/" . $_POST["newFileName"] . ".html";
         rename($_POST["filePath"], $newFilePath);
         header("Location: /clockwork-admin/pages");

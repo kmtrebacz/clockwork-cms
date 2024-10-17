@@ -15,6 +15,7 @@ class DashboardController extends BaseController {
     public function render(): void {
         $this->renderTemplate('/pages/dashboard.twig', [
             'error' => $_GET['error'] ?? null,
+            'message' => $_GET['message'] ?? null,
             'activeNavItem' => 'Dashboard',
             'nav' => true,
             'cards' => [

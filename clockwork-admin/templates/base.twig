@@ -22,7 +22,10 @@
                          <h3>ERROR!</h3>
                     </div>
                     <div class="popup-content">
-                         <p>{{ error|replace({'-': " "}) }}</p>
+                         <h4>Type of error: {{ error|replace({'-': " "}) }}</h4>
+                         {% if message %}
+                              <p>Message: {{ message|replace({'-': ' '}) }}</p>
+                         {% endif %}
                     </div>
                </div>
           </div>

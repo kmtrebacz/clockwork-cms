@@ -3,7 +3,6 @@
 namespace Admin\Services;
 
 require_once __DIR__ . "/../Handlers/ErrorHandler.php";
-require_once __DIR__ . "/../Handlers/ErrorHandler.php";
 
 use Admin\Handlers\ErrorHandler;
 
