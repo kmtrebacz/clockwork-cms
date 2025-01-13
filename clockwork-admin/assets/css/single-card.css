@@ -1,15 +1,36 @@
-main {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+     min-width: auto;
 }
 
-main > .card {
-    margin-bottom: 0;
+
+input[type=button], 
+input[type=submit] {
+    color: var(--black);
+    background-color: var(--white);
+    height: 23px;
+    border: 1px solid var(--dark-1);
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+input[type=button]:hover, 
+input[type=submit]:hover {
+    background-color: var(--light-1);
+}
+
+main > article > .content {
+     height: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     grid-template-columns: none!important;
+}
+
+main > article > .content > .card {
+     width: 300px;
 }
 
 input[type="text"], input[type="password"], input[type="number"] {
-    padding: 0.6em;
-    width: 20em;
+    padding: 5px;
+    width: 100%;
 }

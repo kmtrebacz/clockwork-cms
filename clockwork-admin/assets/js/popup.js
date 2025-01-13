@@ -4,7 +4,7 @@ const closeButtons = document.querySelectorAll('.close-popup');
 
 function openPopup(popupId) {
      const popup = document.getElementById(popupId);
-     popup.style.display = 'flex';
+     popup.style.display = 'block';
      document.body.classList.add('popup-active');
 }
 
@@ -25,14 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
             closePopup();
-        });
-    });
-
-    popups.forEach(popup => {
-        popup.addEventListener('click', function(event) {
-            if (event.target === popup) {
-                closePopup();
-            }
         });
     });
 });

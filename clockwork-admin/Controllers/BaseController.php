@@ -28,7 +28,7 @@ class BaseController {
 
     private function initializeTwig(): Environment
     {
-        $loader = new FilesystemLoader(__DIR__ . '/../templates');
+         $loader = new FilesystemLoader(__DIR__ . '/../templates');
         $twig = new Environment($loader, [
             'cache' => __DIR__ . '/../storage/cache/twig',
             'debug' => true,

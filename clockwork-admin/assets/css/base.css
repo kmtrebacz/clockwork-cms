@@ -1,194 +1,289 @@
+@font-face {
+    font-family: cordata;
+    src: URL('./../font/unifont.ttf');
+}
+
 :root {
-    --primary-color: #ff661f;
-    --primary-light: #ff8b4d;
-    --primary-dark: #cc5200;
+    --primary-color: #FF9A00;
+    --primary-dark: #ff5e00;
 
     --success-color: #28A745;
     --error-color: #DC3545;
+    --error-bg-color: #f8db34;
 
-    --background-color: #F4F4F9;
-    --text-color: #333333;
-    --muted-color: #6C757D;
-    --border-color: #E0E0E0;
+    --white: #fff;
+    --light-1: #e0e0e0;
+    --black: #000;
+    --dark-1: #2E3436;
+    --dark-2: #343A40;
+    --dark-3: #495057;
+
+    --dark-bg-1: rgba(33,37,41,1);
+    --dark-bg-2: rgba(56,59,63,1);
+    --light-bg-1: rgba(73,80,87,1);
+    --light-bg-2: rgba(92,98,104,1);
+
+    --dark-bg-gradient: linear-gradient(90deg, var(--dark-bg-1) 0%, var(--dark-bg-2) 100%);
+    --light-bg-gradient: linear-gradient(90deg, var(--light-bg-1) 0%, var(--light-bg-2) 100%);
 }
 
 * {
-    padding: 0;
     margin: 0;
-    transition: 0.2s;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cordata;
+    font-size: 16px;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    min-width: 750px;
 }
 
-.container {
-    display: flex;
-    height: 100vh;
-}
 
-nav {
-    background-color: var(--text-color);
-    color: var(--background-color);
-    width: 12em;
-    height: 100vh;
-    position: fixed;
+header {
+    width: 100%;
+    height: 51px;
+    color: var(--white);
+    background: var(--dark-bg-gradient);
+    border-bottom: 2px solid var(--primary-color);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    top: 0;
-    left: 0;
 }
 
-nav > ul {
-    list-style: none;
+header > div.logo {
+    padding: 4px 16px;
 }
 
-nav > ul > a {
-    text-decoration: none;
-    color: var(--background-color);
-    background: none;
-    border: none;
-    margin: 0;
-    padding: 0;
+header > div.logo > h1 {
+    font-size: 18px;
+    font-weight: 100;
 }
 
-nav > ul > a:hover, nav > ul > a:focus {
-    text-decoration: none;
-    color: inherit;
+header > div.logo > span {
+    font-size: 13px;
 }
 
-nav > ul > a > li {
-    padding: 0.7em;
+header > div.user {
+    display: flex;
+    align-items: center;
+    padding: 4px 16px;
+}
+
+header > div.user > span {
+    font-size: 14px;
+}
+
+header > div.user > span > a {
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+
+main {
+    display: flex;
+}
+
+main > aside {
+    flex-shrink: 0;
+    width: 175px;
+    padding: 16px;
+    color: var(--white);
+    background: var(--light-bg-gradient);
+}
+
+main > aside > nav > ul {
+    font-size: 16px;
+    list-style-type: none;
+}
+
+main > aside > nav > ul > li {
+    margin-bottom: 2px;
+}
+
+main > aside > nav > ul > li::before {
+    content: "➧";
+    margin-right: 2px;
+}
+
+main > aside > nav > ul > li > a {
+    color: var(--white);
+}
+
+main > aside > nav > ul > li > a.active {
+    color: var(--primary-color);
+}
+
+main > aside > nav > ul > li > a.active:hover {
+    color: var(--primary-dark);
+}
+
+main > article {
+    width: 100%;
+    height: calc(100vh - 51px);
+    color: var(--black);
+    overflow-y: scroll;
+}
+
+main > article > nav {
+    height: 35px;
+    width: 100%;
+    padding: 6px;
+    background-color: var(--dark-2);
+}
+
+main > article > nav > input[type=text] {
+    background-color: var(--dark-3);
+    border: 1px solid var(--white);
+    height: 23px;
+    color: var(--white);
+}
+
+main > article > nav > input[type=button], 
+main > article > nav > input[type=submit], 
+main > article > nav > button {
+    color: var(--white);
+    height: 23px;
+    background-color: #00000000;
+    border: 1px solid var(--white);
     cursor: pointer;
+    padding: 0 4px;
 }
 
-nav > ul > a > li:hover {
-    background-color: var(--primary-light);
+main > article > div.error {
+    width: 100%;
+    padding: 5px;
 }
 
-nav > ul > a > li.active {
-    background-color: var(--primary-color);
+main > article > div.error > div {
+    display: flex;
+    background-color: var(--error-bg-color);
+    border: 1px solid var(--error-color);
+    padding: 5px 10px;
 }
 
-nav > ul > a > li.active:hover {
-    background-color: var(--primary-dark);
+main > article > div.error > div > span {
+    width: 100%;
 }
 
-nav > ul > a > li > i {
-    margin-right: 0.7em;
+main > article > div.error > div > button {
+    aspect-ratio: 1;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--dark-1);
+    background-color: var(--error-color);
+    color: var(--white);
 }
 
-main > .card, main > section, .popup#popup-error > .popup-card {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    margin-bottom: 1.2em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+main > article > div.content {
+    display: grid;
+    padding: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
-main > .card > .card-header, .popup#popup-error .popup-header {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    padding: 1em;
-    border-bottom: 1px solid var(--border-color);
+
+@media screen and (max-width: 1150px) {
+    main > article > div.content {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-main > .card > .card-body, main > section, .popup#popup-error .popup-content {
-    padding: 0 1em;
+
+a {
+    text-decoration: none;
 }
 
-main > .card > .card-body > *:not(br), main > section > *:not(br), .popup#popup-error .popup-content > *:not(br) {
-    margin: 1em 0;
+a:hover {
+    text-decoration: underline;
+    color: var(--primary-color)!important;
 }
 
-main table {
+b, i {
+    letter-spacing: 1px;
+}
+
+
+table {
      width: 100%;
      border-collapse: collapse;
-     border: 1px solid var(--muted-color);
+     border: 1px solid var(--dark-1);
 }
 
-main table th, main table td {
-    border: 1px solid var(--muted-color);
+table th, table td {
+    border: 1px solid var(--dark-1);
     padding: 0.5em;
     text-align: left;
 }
 
 
-a:not(ul > a) {
-    text-decoration: underline;
-    color: var(--primary-color);
-}
-
-a:not(ul > a):hover {
-    color: var(--primary-dark);
-}
-
-ul, ol {
-    list-style-position: inside;
-}
-
-ul > li::marker {
-    color: var(--primary-color);
-}
-
-input[type=text], input[type=password], input[type=number] {
-    border: 0;
-    padding: 0.2em;
-    border-bottom: 2px solid var(--border-color);
-    background-color: var(--background-color);
-}
-
-input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
-    outline: none;
-    border-bottom-color: var(--primary-color);
-    background-color: var(--border-color);
-}
 
 input[type=button], input[type=submit], button {
-    background-color: var(--background-color);
-    padding: 0.4em;
-    outline: none;
-    border: 2px solid var(--border-color);
+    color: var(--black);
+    height: 23px;
+    background-color: var(--white);
+    border: 1px solid var(--dark-1);
     cursor: pointer;
+    padding: 0 4px;
 }
+
 
 input[type=button]:hover, input[type=submit]:hover, button:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    border: 2px solid var(--primary-color);
+    color: var(--black);
+    height: 23px;
+    background-color: var(--light-1);
+    border: 1px solid var(--dark-1);
+    cursor: pointer;
+    padding: 0 4px;
 }
 
+
+.card {
+    min-height: 160px;
+    border: 1px solid var(--dark-1);
+}
+
+.card > .card-header {
+    height: 25px;
+    color: var(--white);
+    background-color: var(--dark-3);
+    text-align: center;
+    font-size: 18px;
+}
+
+.card > .card-body {
+    padding: 0 10px;
+}
+
+.card > .card-body > *:not(br), main > section > *:not(br), .popup#popup-error .popup-content > *:not(br) {
+    margin: 5px 0;
+}
+
+
 .popup {
+    position: absolute;
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     margin: 0!important;
-    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--dark-1);
+    background-color: var(--white);
     z-index: 999;
     justify-content: center;
     align-items: center;
 }
 
+.popup.error {
+    position: static;
+    border: 0;
+}
+
 .popup-content {
     background-color: var(--background-color);
-    padding: 1em;
+    padding: 5px 10px;
     text-align: center;
     position: relative;
     z-index: 1000;
-}
-
-body.popup-active {
-    overflow: hidden;
-}
-
-@media screen and (max-width: 992px) {
-    body {
-        font-size: 14px;
-    }
 }

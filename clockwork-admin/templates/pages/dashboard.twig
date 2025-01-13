@@ -4,19 +4,13 @@
 
 {% block title %}Dashboard{% endblock %}
 
-{% block head %}
-    <link rel="stylesheet" href="assets/css/dashboard.css">
-{% endblock %}
-
 {% block content %}
     {% for card in cards %}
-        <div class="card">
-            <div class="card-header">
-                <h3>{{ card.heading }}</h3>
-            </div>
+        <section class="card">
+            <div class="card-header">{{ card.heading }}</div>
             <div class="card-body">
-                {{ card.content | raw }}
+                <span>{{ card.content | raw }}</span>
             </div>
-        </div>
+        </section>
     {% endfor %}
 {% endblock %}

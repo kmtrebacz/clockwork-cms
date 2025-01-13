@@ -15,58 +15,55 @@
           {% block head %}{% endblock %}
      </head>
      <body>
-          {% if error is not null %}
-          <div class="popup" id="popup-error">
-               <div class="popup-card">
-                    <div class="popup-header">
-                         <h3>ERROR!</h3>
-                    </div>
-                    <div class="popup-content">
-                         <h4>Type of error: {{ error|replace({'-': " "}) }}</h4>
-                         {% if message %}
-                              <p>Message: {{ message|replace({'-': ' '}) }}</p>
-                         {% endif %}
-                    </div>
-               </div>
-          </div>
-          {% endif %}
-          <div class="container">
+          <header>
+              <div class="logo">
+                  <h1>Clockwork CMS</h1>
+                  <span>Better than Wordpress</span>
+              </div>
+              <div class="user">
+                    {% if nav %}
+                         <span>You are logged as <a href="#">test_user</a>. Now you can <a href="/clockwork-admin/log-out">log out</a>.</span>
+                    {% endif %}
+              </div>
+          </header>
+          <main>
                {% if nav %}
-                    <nav>
-                         <ul>
-                              <a href="/clockwork-admin/dashboard">
-                                   <li {% if activeNavItem == "Dashboard" %}class="active"{% endif %}>
-                                        <i class="fas fa-tachometer-alt"></i>
-                                        <span>Dashboard</span>
-                                   </li>
-                              </a>
-                              <a href="/clockwork-admin/pages">
-                                   <li {% if activeNavItem == "Pages" %}class="active"{% endif %}>
-                                        <i class="fas fa-file-alt"></i>
-                                        <span>Pages</span>
-                                   </li>
-                              </a>
-                              <a href="/clockwork-admin/settings">
-                                   <li {% if activeNavItem == "Settings" %}class="active"{% endif %}>
-                                        <i class="fas fa-cog"></i>
-                                        <span>Settings</span>
-                                   </li>
-                              </a>
-                         </ul>
-                         <ul>
-                              <a href="/clockwork-admin/log-out">
-                                   <li>
-                                        <i class="fas fa-sign-out-alt"></i>
-                                        <span>Log out</span>
-                                   </li>
-                              </a>
-                         </ul>
-                    </nav>
+                    <aside>
+                         <nav>
+                              <ul>
+                                   <li><a href="/clockwork-admin/dashboard" {% if activeNavItem == "Dashboard" %}class="active"{% endif %}>Dashboard</a></li>
+                                   <li><a href="/clockwork-admin/pages" {% if activeNavItem == "Pages" %}class="active"{% endif %}>Pages</a></li>
+                                   <li><a href="/clockwork-admin/settings" {% if activeNavItem == "Settings" %}class="active"{% endif %}>Settings</a></li>
+                              </ul>
+                         </nav>
+                    </aside>
                {% endif %}
-               <main>
-               {% block content %}{% endblock %}
-               </main>
-          </div>
+               <article>
+                  {% if nav_search %}
+                    <nav>
+                         <input type="text" name="" id="">
+                         <input type="submit" value="Search">
+                    </nav>
+                  {% endif %}
+                  {% if error is not null %}
+                    <div class="popup error" id="popup-error">
+                         <div>
+                              <span>
+                                   <b>ERROR:</b>
+                                   Type of error: {{ error|replace({'-': " "}) }}. 
+                                   {% if message %}
+                                        Message: {{ message|replace({'-': ' '}) }}.
+                                   {% endif %}
+                              </span>
+                              <button class="close-popup">&times;</button>
+                         </div>
+                    </div>
+                  {% endif %}
+                  <div class="content">
+                    {% block content %}{% endblock %}
+                  </div>
+               </article>
+          </main>
           <script src="assets/js/popup.js"></script>
           {% if error is not null %}
           <script>
@@ -74,5 +71,5 @@
           </script>
           {% endif %}
           {% block js %}{% endblock %}
-     </body>
+      </body>
 </html>

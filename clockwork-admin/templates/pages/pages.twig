@@ -26,21 +26,23 @@
                               <td>{{ page.last_changes }}</td>
                               <td>
                                    <a href="#">Edit</a>
-                                   <a href="#" class="popup-link" data-popup="popup-{{ page.name }}">Quick edit</a>
+                                   <span>
+                                        <a href="#" class="popup-link" data-popup="popup-{{ page.name }}">Quick edit</a>
+                                        <div class="popup" id="popup-{{ page.name }}">
+                                             <div class="popup-content">
+                                                  <form action="/clockwork-admin/pages/rename" method="post">
+                                                       <input type="hidden" name="filePath" value="{{ page.path }}">
+                                                       <input type="text" name="newFileName" placeholder="New name">
+                                                       <input type="submit" value="Rename">
+                                                  </form>
+                                                  <br>
+                                                  <button class="close-popup">Close</button>
+                                             </div>
+                                        </div>
+                                   </span>
                                    <a href="#">Delete</a>
                               </td>
                          </tr>
-                         <div class="popup" id="popup-{{ page.name }}">
-                              <div class="popup-content">
-                                   <form action="/clockwork-admin/pages/rename" method="post">
-                                        <input type="hidden" name="filePath" value="{{ page.path }}">
-                                        <input type="text" name="newFileName" placeholder="New name">
-                                        <input type="submit" value="Rename">
-                                   </form>
-                                   <br><br>
-                                   <button class="close-popup">Close</button>
-                              </div>
-                         </div>
                          {% endfor %}
                     </tbody></table>
                {% else %}
