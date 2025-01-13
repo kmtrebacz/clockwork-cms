@@ -37,6 +37,7 @@ class AuthController extends BaseController {
 
           if ($this->validateLogin($username, $password)) {
                session_start();
+               $_SESSION['user_name'] = $username;
                $_SESSION['user_id'] = $this->getUserId($username);
                header('Location: dashboard');
                exit();

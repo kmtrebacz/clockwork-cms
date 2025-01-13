@@ -51,11 +51,14 @@ class BaseController {
 
     protected function renderTemplate(string $templatePath, array $data): void
     {
-        try {
-            $template = $this->twig->load($templatePath);
-            echo $template->render($data);
+         try {
+               session_start();
+               $data['user_name'] = $_SESSION['user_name'];
+
+               $template = $this->twig->load($templatePath);
+               echo $template->render($data);
         } catch (LoaderError|RuntimeError|SyntaxError $e) {
-            echo 'An error occurred while loading the template: ' . $e->getMessage();
+               echo 'An error occurred while loading the template: ' . $e->getMessage();
         }
     }
 }
