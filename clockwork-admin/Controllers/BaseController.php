@@ -52,7 +52,8 @@ class BaseController {
     protected function renderTemplate(string $templatePath, array $data): void
     {
          try {
-               session_start();
+               if (!$_SESSION)
+                    session_start();
                $data['user_name'] = $_SESSION['user_name'];
 
                $template = $this->twig->load($templatePath);

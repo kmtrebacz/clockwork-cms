@@ -22,6 +22,6 @@ class PagesServices extends BaseService
         }
         $newFilePath = $this->trimAfterLastSlash($_POST["filePath"]) . "/" . $_POST["newFileName"] . ".html";
         rename($_POST["filePath"], $newFilePath);
-        header("Location: /clockwork-admin/pages");
+        header('Location: /clockwork-admin/pages');
     }
 }

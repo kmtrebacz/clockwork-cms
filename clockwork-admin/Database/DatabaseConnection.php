@@ -3,6 +3,7 @@
 namespace Admin\Database;
 
 use PDO;
+use PDOException;
 
 class DatabaseConnection {
      private string $path;
@@ -21,10 +22,10 @@ class DatabaseConnection {
         }
     }
 
-    public function query(string $sql, array $params = [], bool $returningArray = false): ?array {
+    public function query(string $sql, array $params = [], bool $returningArray = false) {
         try {
              $stmt = $this->db->prepare($sql);
-             if ($params == []) $stmt->execute();
+             if (empty($params)) $stmt->execute();
              else $stmt->execute($params);
         } catch (PDOException $e) {
             die("Preparing the query failed: " . $e->getMessage());
