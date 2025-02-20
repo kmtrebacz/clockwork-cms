@@ -24,4 +24,10 @@ class PagesServices extends BaseService
         rename($_POST["filePath"], $newFilePath);
         header('Location: /clockwork-admin/pages');
     }
+
+     public function updateUrl(): void {
+        if ($_POST["newUrl"] == "") {
+            throw new \Exception("New file name is empty!");
+        }
+     }
 }

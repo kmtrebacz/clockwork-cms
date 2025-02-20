@@ -17,23 +17,24 @@ use Admin\Handlers\ErrorHandler;
 use Admin\Middlewares\AuthMiddleware;
 use Admin\Services\PagesServices;
 use Pecee\SimpleRouter\SimpleRouter;
-use Twig\Error\Error;
 
-SimpleRouter::get('/clockwork-admin/', function () {
-    header('Location: /clockwork-admin/dashboard');
+SimpleRouter::group(['prefix' => '/clockwork-admin'], function () {
+     SimpleRouter::get('/', function () {
+          header('Location: /clockwork-admin/dashboard');
+     });
+
+    SimpleRouter::group([
+        'middleware' => AuthMiddleware::class,
+        'exceptionHandler' => ErrorHandler::class
+    ],function () {
+        SimpleRouter::get('/dashboard', [DashboardController::class, 'render']);
+        SimpleRouter::get('/pages', [PagesController::class, 'render']);
+        SimpleRouter::post('/pages/rename', [PagesServices::class, 'renameFile']);
+    });
+
+    SimpleRouter::get('/log-in', [AuthController::class, 'login']);
+    SimpleRouter::post('/log-in', [AuthController::class, 'handleLogin']);
+    SimpleRouter::get('/sign-up', [AuthController::class, 'signup']);
+    SimpleRouter::post('/sign-up', [AuthController::class, 'handleSignup']);
+    SimpleRouter::get('/log-out', [AuthController::class, 'logout']);
 });
-
-SimpleRouter::group([
-    'middleware' => AuthMiddleware::class,
-    'exceptionHandler' => ErrorHandler::class
-],function () {
-    SimpleRouter::get('/clockwork-admin/dashboard', [DashboardController::class, 'render']);
-    SimpleRouter::get('/clockwork-admin/pages', [PagesController::class, 'render']);
-    SimpleRouter::post('/clockwork-admin/pages/rename', [PagesServices::class, 'renameFile']);
-});
-
-SimpleRouter::get('/clockwork-admin/log-in', [AuthController::class, 'login']);
-SimpleRouter::post('/clockwork-admin/log-in', [AuthController::class, 'handleLogin']);
-SimpleRouter::get('/clockwork-admin/sign-up', [AuthController::class, 'signup']);
-SimpleRouter::post('/clockwork-admin/sign-up', [AuthController::class, 'handleSignup']);
-SimpleRouter::get('/clockwork-admin/log-out', [AuthController::class, 'logout']);
